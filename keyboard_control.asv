@@ -1,0 +1,31 @@
+pi_obj = raspi('raspberrypi-t263BtM4ig','pi','raspberry');
+myserialdevice = serialdev(pi_obj,'/dev/ttyACM0',9600);
+cam = webcam(pi_obj);
+
+%%
+while true
+
+    waitforbuttonpress;
+
+    value = double(get(gcf,'CurrentCharacter'));
+
+    if value == 30
+        write(myserialdevice,'F')
+    else if value == 31
+        write(myserialdevice,'B')
+    else if value == 28
+        write(myserialdevice,'L')
+    else if value == 29
+        write(myserialdevice,'R')
+    else if value == 32
+        write(myserialdevice,'S')
+    
+    belief = imassignment();
+    heatmap(belief)
+
+end
+end
+end
+end
+end
+end
